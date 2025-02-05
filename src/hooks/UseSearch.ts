@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Character } from '../types/RickAndMorty';
 import { searchCharacters, ApiError } from '../services/RickAndMortyApi';
-import { useDebounce } from './UseDebounce';
 
 interface SearchState {
   results: Character[];
@@ -16,7 +15,7 @@ export const useSearch = (query: string) => {
     error: null,
   });
 
-  const debouncedQuery = useDebounce(query, 500);
+  const debouncedQuery = query;
 
   useEffect(() => {
     if (!debouncedQuery.trim()) {
@@ -24,10 +23,9 @@ export const useSearch = (query: string) => {
       return;
     }
 
-    const abortController = new AbortController();
     setState(prev => ({ ...prev, isLoading: true, error: null }));
 
-    searchCharacters(debouncedQuery, abortController.signal)
+    searchCharacters(debouncedQuery)
       .then(data => {
         setState(prev => ({
           ...prev,
@@ -36,8 +34,6 @@ export const useSearch = (query: string) => {
         }));
       })
       .catch(error => {
-        if (error.name === 'AbortError') return;
-        
         const message = error instanceof ApiError 
           ? error.message 
           : 'An unexpected error occurred';
@@ -48,10 +44,6 @@ export const useSearch = (query: string) => {
           isLoading: false,
         }));
       });
-
-    return () => {
-      abortController.abort();
-    };
   }, [debouncedQuery]);
 
   return state;

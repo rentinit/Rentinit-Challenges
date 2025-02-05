@@ -9,12 +9,10 @@ export class ApiError extends Error {
 }
 
 export const searchCharacters = async (
-  query: string,
-  signal?: AbortSignal
+  query: string
 ): Promise<ApiResponse> => {
   const response = await fetch(
-    `${API_BASE_URL}/character/?name=${encodeURIComponent(query)}`,
-    { signal }
+    `${API_BASE_URL}/character/?name=${encodeURIComponent(query)}`
   );
 
   if (!response.ok) {

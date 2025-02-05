@@ -2,28 +2,30 @@
 
 ## Overview
 
-Welcome to the live coding challenge for the Senior React Developer position. In this challenge, you are tasked with building a **Live Search Component** in React that will:
+Welcome to the live coding challenge for the Senior React Developer position. In this challenge, you are tasked with enhancing a **Live Search Component**:
 
-- Render an input field for user search queries.
-- Fetch data from an API (or simulate an API call using `setTimeout`).
-- Display the list of search results.
+### Requirements
+
 - Implement input debouncing to reduce unnecessary API calls.
-- Handle loading states and error conditions gracefully.
-
-> **Note:** The goal is not necessarily to complete the entire solution perfectly, but to showcase your approach, coding style, and ability to discuss design tradeoffs.
-
-## Requirements
-
-- Use React functional components and hooks (e.g., `useState`, `useEffect`).
-- Implement debouncing to limit API calls.
-- Manage asynchronous API calls with proper error handling.
-- Write clean, maintainable TypeScript code.
-- Consider potential extensions (e.g., cancellation of previous API calls, pagination) and discuss tradeoffs as you work.
+- Implement cancellation of previous API calls.
+- Improve structure of the code.
 
 ## Getting Started
 
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/your-username/react-interview-challenge.git
-   cd react-interview-challenge
+   git clone https://github.com/rentinit/Rentinit-Challenges.git
+   ```
+
+2. **Install Dependancies:**
+
+   ```bash
+   npm install
+   ```
+
+3. **Run Dev Server:**
+
+   ```bash
+   npm run dev
+   ```

@@ -1,4 +1,4 @@
-# Live Coding Challenge: Build a Live Search Component
+# Live Coding Challenge: Rick And Morty Challenge
 
 ## Overview
 
@@ -18,13 +18,19 @@ Welcome to the live coding challenge for the Senior React Developer position. In
    git clone https://github.com/rentinit/Rentinit-Challenges.git
    ```
 
-2. **Install Dependancies:**
+2. **Checkout the branch:**
+
+   ```bash
+   git checkout rick-and-morty-challenge
+   ```
+
+3. **Install Dependancies:**
 
    ```bash
    npm install
    ```
 
-3. **Run Dev Server:**
+4. **Run Dev Server:**
 
    ```bash
    npm run dev

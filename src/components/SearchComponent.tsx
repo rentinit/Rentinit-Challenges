@@ -1,14 +1,6 @@
-import React, { ChangeEvent } from "react";
-import { useSearch } from "../hooks/UseSearch";
+import React from "react";
 
 export const SearchComponent: React.FC = () => {
-  const [query, setQuery] = React.useState("");
-  const { results, isLoading, error } = useSearch(query);
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -21,107 +13,56 @@ export const SearchComponent: React.FC = () => {
           </p>
         </div>
 
+        {/* Search Characters Input */}
         <div className="max-w-xl mx-auto mb-12">
           <div className="relative">
             <input
               type="text"
-              value={query}
-              onChange={handleInputChange}
               placeholder="Search characters..."
               className="w-full p-4 pl-6 pr-12 text-lg border-2 border-gray-300 rounded-full 
                        focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
                        transition-all duration-200 outline-none
                        placeholder-gray-400"
             />
-            {query && (
-              <button
-                onClick={() => setQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-            )}
           </div>
         </div>
 
-        {isLoading && (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
-          </div>
-        )}
+        {/* Spinning Loader */}
+        <div className="flex justify-center items-center py-12">
+          <div className="animate-spin h-12 w-12 border-4 border-blue-500 border-t-transparent rounded-full"></div>
+        </div>
 
-        {error && (
-          <div className="max-w-xl mx-auto">
-            <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-center">
-              <p className="text-red-600">{error}</p>
-            </div>
+        {/* Error Message */}
+        <div className="max-w-xl mx-auto">
+          <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-center">
+            <p className="text-red-600">Error Message</p>
           </div>
-        )}
+        </div>
 
+        {/* Characters Grid */}
         <div className="mt-8">
-          {!isLoading && !error && results.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {results.map((character) => (
-                <div
-                  key={character.id}
-                  className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-200 hover:scale-105 hover:shadow-xl"
-                >
-                  <div className="w-full">
-                    <img
-                      src={character.image}
-                      alt={character.name}
-                      className="w-full h-32 object-cover"
-                    />
-                  </div>
-                  <div className="p-3">
-                    <h3 className="text-base font-bold text-gray-800 mb-1 truncate">
-                      {character.name}
-                    </h3>
-                    <div className="space-y-1">
-                      <div className="flex items-center">
-                        <span
-                          className={`inline-block w-2 h-2 rounded-full mr-2 ${
-                            character.status === "Alive"
-                              ? "bg-green-500"
-                              : character.status === "Dead"
-                              ? "bg-red-500"
-                              : "bg-gray-500"
-                          }`}
-                        ></span>
-                        <p className="text-sm text-gray-600">
-                          {character.status} - {character.species}
-                        </p>
-                      </div>
-                      {character.type && (
-                        <p className="text-xs text-gray-500 truncate">
-                          Type: {character.type}
-                        </p>
-                      )}
-                    </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-200 hover:scale-105 hover:shadow-xl">
+              <div className="w-full">
+                <img className="w-full h-32 object-cover" />
+              </div>
+              <div className="p-3">
+                <h3 className="text-base font-bold text-gray-800 mb-1 truncate">
+                  Character Name
+                </h3>
+                <div className="space-y-1">
+                  <div className="flex items-center">
+                    <span
+                      className={`inline-block w-2 h-2 rounded-full mr-2 `}
+                    ></span>
+                    <p className="text-sm text-gray-600">
+                      Character Status - Character Species
+                    </p>
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          )}
-
-          {!isLoading && !error && query && results.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-xl text-gray-500">No characters found</p>
-              <p className="text-gray-400 mt-2">Try a different search term</p>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
